@@ -1,8 +1,4 @@
-//import 'package:androidflutter/views/device_info.dart';
-//import 'package:androidflutter/views/home.dart';
 import 'package:androidflutter/views/splash_view.dart';
-//import 'package:androidflutter/views/dropdown_view.dart';
-//import 'package:androidflutter/views/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,18 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Android Flutter',
+      debugShowCheckedModeBanner: false,
+      title: 'Aplikasi Management Kontak',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const SplashScreen(),
-      /*routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
-        //'/': (context) => const PageLogin(),
-        //'/': (context) => const DropdownPage(),
-        //'/': (context) => const DeviceInfoPage(),
-        //'/': (context) => const PageHome(),
-      },*/
     );
   }
 }

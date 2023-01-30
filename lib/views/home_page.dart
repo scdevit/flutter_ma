@@ -1,4 +1,3 @@
-import 'package:androidflutter/views/listview_pages.dart';
 import 'package:androidflutter/views/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,6 +7,33 @@ class HomePage extends StatefulWidget {
 
   @override
   _HomePageState createState() => _HomePageState();
+}
+
+Future<List<Data>> fetchData() async {
+  var url = Uri.parse('https://jsonplaceholder.typicode.com/albums');
+  final response = await http.get(url);
+  if (response.statusCode == 200) {
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((data) => Data.fromJson(data)).toList();
+  } else {
+    throw Exception('Unexpected error occured!');
+  }
+}
+
+class Data {
+  final int userId;
+  final int id;
+  final String title;
+
+  Data({required this.userId, required this.id, required this.title});
+
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+    );
+  }
 }
 
 class _HomePageState extends State<HomePage> {
@@ -89,16 +115,47 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.lock_open),
                 label: const Text("Log Out")),
             const SizedBox(height: 15),
-            ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const PageListView()));
-                },
-                icon: const Icon(Icons.list_alt),
-                label: const Text("Page List View"))
+            const MyStatefulWidget()
           ],
+          
         ),
       ),
+    );
+  }
+}
+
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({super.key});
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Data>>(
+      future: fetchData(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 75,
+                  color: Colors.white,
+                  child: Center(
+                    child: Text(snapshot.data![index].title),
+                  ),
+                );
+              });
+        } else if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+        // By default show a loading spinner.
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

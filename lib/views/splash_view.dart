@@ -27,8 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   toHomePage() {
     Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HomePage()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomePage()));
     });
   }
 
@@ -51,14 +51,17 @@ class _SplashScreenState extends State<SplashScreen> {
                   ? FlutterLogo(size: screenSize.height / 4)
                   : const SizedBox()),
           const SizedBox(height: 25),
-          const Text("Welcome the app..", style: TextStyle(fontSize: 18)),
-          isVisible ? const Align(
-              //alignment: FractionalOffset.bottomCenter,
-              heightFactor: 5,
-              alignment: Alignment.bottomCenter,
-              child: CircularProgressIndicator(
-                color: Colors.grey,
-              )) :const SizedBox() 
+          const Text("Selamat Datang di Contact Management",
+              style: TextStyle(fontSize: 18)),
+          isVisible
+              ? const Align(
+                  //alignment: FractionalOffset.bottomCenter,
+                  heightFactor: 5,
+                  alignment: Alignment.bottomCenter,
+                  child: CircularProgressIndicator(
+                    color: Colors.grey,
+                  ))
+              : const SizedBox()
         ],
       )),
     );

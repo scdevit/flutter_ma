@@ -237,9 +237,9 @@ class _PageLoginState extends State<PageLogin> {
                   width: double.infinity,
                   height: 180,
                   decoration: const BoxDecoration(
-                    color: Colors.amber,
+                    color: Colors.black,
                     image: DecorationImage(
-                      image: AssetImage('assets/images/logo-white-sm.png'),
+                      image: AssetImage('assets/images/fortech.png'),
                     ),
                   ),
                 ),
@@ -249,7 +249,7 @@ class _PageLoginState extends State<PageLogin> {
                 padding: const EdgeInsets.all(8.0),
                 alignment: Alignment.center,
                 child: const Text(
-                  "LOGIN APP",
+                  "Sistem Manajemen Pegawai",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -282,7 +282,7 @@ class _PageLoginState extends State<PageLogin> {
                     onPressed: () => _validateInputs(),
                     icon: const Icon(Icons.arrow_right_alt),
                     label: const Text(
-                      "LOG IN",
+                      "Masuk",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )),
